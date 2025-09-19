@@ -1,0 +1,19 @@
+{
+  "name": "web",
+  "sourceRoot": "apps/web",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd apps/web && npm run dev"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd apps/web && npm run build"
+      }
+    }
+  }
+}

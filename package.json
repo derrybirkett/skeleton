@@ -1,0 +1,19 @@
+{
+  "name": "agent-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "tools/*"
+  ],
+  "scripts": {
+    "postinstall": "nx repair || true",
+    "dev:web": "nx serve web",
+    "build:web": "nx build web",
+    "lint": "echo 'add linting' && true",
+    "format": "echo 'add formatting' && true"
+  },
+  "devDependencies": {
+    "nx": "^20.0.0",
+    "typescript": "^5.4.0"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "runtimes": {
+    "linear": {
+      "command": "node",
+      "args": ["../../../../tools/linear-mcp-server/dist/index.js"],
+      "env": {
+        "LINEAR_API_KEY": "lin_xxx",
+        "LINEAR_TEAM_KEY": "ENG"
+      }
+    }
+  }
+}

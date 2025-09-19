@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Guard to ensure changelog updated when docs/ or agents/ change
+set -euo pipefail
+changed_docs=$(git diff --cached --name-only | grep -E '^docs/|^agents/' || true)
+if [[ -n "$changed_docs" ]]; then
+  if ! git diff --cached --name-only | grep -q '^docs/changelog.md'; then
+    echo "❌ You changed docs/ or agents/, but did not stage docs/changelog.md"
+    echo "   Please add a changelog line."
+    exit 1
+  fi
+fi

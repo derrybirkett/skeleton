@@ -1,0 +1,85 @@
+agents:
+  - id: ceo
+    name: CEO
+    owner: ceo@example.com
+    responsibilities:
+      - Vision and governance
+      - Policy approval
+    docs:
+      - agents/ceo/README.md
+
+  - id: pm
+    name: Product Manager
+    owner: pm@example.com
+    responsibilities:
+      - PRD, Playbook
+      - Personas, journeys, acceptance criteria
+    docs:
+      - agents/product_manager/prd.md
+      - agents/product_manager/playbook.md
+
+  - id: lead-dev
+    name: Lead Full Stack Developer
+    owner: lead.dev@example.com
+    responsibilities:
+      - Repo init, branching, tech stack
+      - Docker, demo runner, CI
+    docs:
+      - agents/lead_full_stack/tech_stack.md
+      - agents/lead_full_stack/demo_runner.md
+
+  - id: cto
+    name: CTO
+    owner: cto@example.com
+    responsibilities:
+      - Big Picture → Data Models → APIs → UI
+      - MCP integration
+    docs:
+      - agents/cto/architecture.md
+      - agents/cto/mcps/README.md
+
+  - id: coo
+    name: COO
+    owner: coo@example.com
+    responsibilities:
+      - Activity Log & changelog linkage
+      - Gatekeeping merges
+    docs:
+      - agents/coo/operations.md
+
+  - id: docs
+    name: Docs Lead
+    owner: docs@example.com
+    responsibilities:
+      - CONTRIBUTING, templates, standards
+    docs:
+      - agents/docs_lead/standards.md
+
+  - id: qa
+    name: QA Lead
+    owner: qa@example.com
+    responsibilities:
+      - Acceptance criteria mapping
+      - CI test scaffolding
+    docs:
+      - agents/qa_lead/quality.md
+
+  - id: ciso
+    name: CISO
+    owner: ciso@example.com
+    responsibilities:
+      - Security posture, secrets policy
+    docs:
+      - SECURITY.md
+
+  - id: staff
+    name: Staff Agents
+    owner: ops@example.com
+    responsibilities:
+      - Weekly/KPI/Incident reports
+    docs:
+      - agents/staff/reports/weekly_status.md
+      - agents/staff/reports/kpi_report.md
+      - agents/staff/reports/incident_report.md
+
+  # MCP integration for PM: see agents/product_manager/mcp/linear

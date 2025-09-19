@@ -1,0 +1,12 @@
+{
+  "extends": "nx/presets/npm.json",
+  "npmScope": "agent",
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "packages"
+  },
+  "targetDefaults": {
+    "build": { "cache": true },
+    "serve": { "cache": false }
+  }
+}
