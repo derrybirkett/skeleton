@@ -9,6 +9,9 @@
     "postinstall": "nx repair || true",
     "dev:web": "nx serve web",
     "build:web": "nx build web",
+    "dev:blog": "nx dev blog",
+    "build:blog": "nx build blog",
+    "preview:blog": "nx preview blog",
     "lint": "echo 'add linting' && true",
     "format": "echo 'add formatting' && true"
   },

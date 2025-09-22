@@ -1,0 +1,120 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+type Props = CollectionEntry<'posts'>;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={post.data.title}>
+  <main>
+    <article class="post">
+      <header class="post-header">
+        <h1>{post.data.title}</h1>
+        <p class="date">{new Date(post.data.pubDate).toLocaleDateString()}</p>
+        <p class="description">{post.data.description}</p>
+        <div class="tags">
+          {post.data.tags?.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      </header>
+      <div class="content">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  .post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  .post-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .post-header h1 {
+    margin: 0 0 1rem 0;
+    color: #1f2937;
+  }
+  
+  .date {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin: 0 0 1rem 0;
+  }
+  
+  .description {
+    font-size: 1.125rem;
+    color: #4b5563;
+    margin: 0 0 1rem 0;
+  }
+  
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .tag {
+    background: #f3f4f6;
+    color: #374151;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+  }
+  
+  .content {
+    line-height: 1.7;
+  }
+  
+  .content :global(h2) {
+    margin: 2rem 0 1rem 0;
+    color: #1f2937;
+  }
+  
+  .content :global(h3) {
+    margin: 1.5rem 0 1rem 0;
+    color: #1f2937;
+  }
+  
+  .content :global(p) {
+    margin: 1rem 0;
+  }
+  
+  .content :global(ul) {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+  
+  .content :global(code) {
+    background: #f3f4f6;
+    padding: 0.125rem 0.25rem;
+    border-radius: 4px;
+    font-family: 'Monaco', 'Consolas', monospace;
+  }
+  
+  .content :global(pre) {
+    background: #1f2937;
+    color: #f9fafb;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+</style>

@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts');
+const sortedPosts = posts.sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf());
+---
+
+<Layout title="Agent Framework Blog">
+  <main>
+    <h1>Latest Updates</h1>
+    <p>Stay up to date with new features and improvements to the Agent Framework.</p>
+    
+    <section class="posts">
+      {sortedPosts.map((post) => (
+        <article class="post-preview">
+          <h2><a href={`/posts/${post.slug}`}>{post.data.title}</a></h2>
+          <p class="date">{new Date(post.data.pubDate).toLocaleDateString()}</p>
+          <p>{post.data.description}</p>
+          <div class="tags">
+            {post.data.tags?.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        </article>
+      ))}
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .posts {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .post-preview {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+  
+  .post-preview h2 {
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .post-preview h2 a {
+    text-decoration: none;
+    color: #1f2937;
+  }
+  
+  .post-preview h2 a:hover {
+    color: #3b82f6;
+  }
+  
+  .date {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin: 0 0 1rem 0;
+  }
+  
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .tag {
+    background: #f3f4f6;
+    color: #374151;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+  }
+</style>

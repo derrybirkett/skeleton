@@ -1,11 +1,29 @@
 #!/usr/bin/env bash
 # Guard to ensure changelog updated when docs/ or agents/ change
+# Also ensure blog posts are created for new features
 set -euo pipefail
+
+# Check for docs/agents changes requiring changelog
 changed_docs=$(git diff --cached --name-only | grep -E '^docs/|^agents/' || true)
 if [[ -n "$changed_docs" ]]; then
   if ! git diff --cached --name-only | grep -q '^docs/changelog.md'; then
     echo "❌ You changed docs/ or agents/, but did not stage docs/changelog.md"
     echo "   Please add a changelog line."
     exit 1
+  fi
+fi
+
+# Check for blog posts when changelog has new features
+if git diff --cached --name-only | grep -q '^docs/changelog.md'; then
+  # Check if changelog contains "Added:" entries (new features)
+  if git diff --cached docs/changelog.md | grep -q '^+.*Added:'; then
+    # Require corresponding blog post
+    blog_posts=$(git diff --cached --name-only | grep -E '^apps/blog/src/content/posts/' || true)
+    if [[ -z "$blog_posts" ]]; then
+      echo "❌ You added new features to changelog.md but no blog post was staged"
+      echo "   CMO must create a blog post in apps/blog/src/content/posts/"
+      echo "   See agents/cmo/blog_strategy.md for guidelines"
+      exit 1
+    fi
   fi
 fi

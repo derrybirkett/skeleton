@@ -72,6 +72,17 @@ agents:
     docs:
       - SECURITY.md
 
+  - id: cmo
+    name: CMO
+    owner: cmo@example.com
+    responsibilities:
+      - Marketing strategy and content
+      - Blog post creation for feature releases
+      - Release announcement coordination
+    docs:
+      - agents/cmo/README.md
+      - agents/cmo/blog_strategy.md
+
   - id: staff
     name: Staff Agents
     owner: ops@example.com
